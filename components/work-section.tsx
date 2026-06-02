@@ -4,8 +4,16 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
-import { Section, Container } from '@/components/section'
-import { Heading, Text, Label } from '@/components/typography'
+import {
+  Section,
+  Container,
+} from '@/components/section'
+
+import {
+  Heading,
+  Text,
+  Label,
+} from '@/components/typography'
 
 import {
   fadeUp,
@@ -34,7 +42,8 @@ const projects = [
     image: '/projects/lumen-hero.jpg',
     glow:
       'from-emerald-500/20 via-teal-500/20 to-cyan-500/20',
-    url: 'https://www.behance.net/gallery/249113145/Lumen-AI-SaaS-Admin-Permissions-Experience',
+    url:
+      'https://www.behance.net/gallery/249113145/Lumen-AI-SaaS-Admin-Permissions-Experience',
     description:
       'Permissions, user-management, and enterprise-scale workflows for AI-powered global insights teams.',
   },
@@ -57,7 +66,8 @@ const projects = [
     image: '/projects/billease-hero.png',
     glow:
       'from-cyan-500/20 via-teal-500/20 to-emerald-500/20',
-    url: 'https://www.behance.net/gallery/239749883/BillEase-Turning-Monthly-Chaos-into-a-Calm-Routine',
+    url:
+      'https://www.behance.net/gallery/239749883/BillEase-Turning-Monthly-Chaos-into-a-Calm-Routine',
     description:
       'A calm utility management system designed around shared ownership, reminders, and financial peace-of-mind.',
   },
@@ -82,7 +92,7 @@ export function WorkSection() {
   const handleProjectClick = (
     url: string
   ) => {
-    if (url === '#') return
+    if (!url) return
 
     window.open(url, '_blank')
   }
@@ -92,9 +102,6 @@ export function WorkSection() {
       id="work"
       className="relative overflow-hidden pt-10 md:pt-16"
     >
-      {/* Top atmospheric bridge */}
-      <div className="absolute top-[-180px] left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-fuchsia-500/8 blur-[160px] rounded-full pointer-events-none" />
-
       {/* Atmosphere */}
       <AmbientOrb
         duration={24}
@@ -125,48 +132,46 @@ export function WorkSection() {
           transition={smoothTransition}
           className="mb-14 md:mb-20 relative z-10"
         >
-          <Label className="mb-4">
+          <Label className="mb-5">
             Selected Work
           </Label>
 
           <Heading
             as="h2"
-            size="section"
+            size="xl"
             className="max-w-3xl mb-6"
           >
             Building thoughtful digital
-            experiences through systems,
-            storytelling, and cinematic
-            interaction design.
+            experiences across fintech,
+            enterprise SaaS, and public
+            platforms.
           </Heading>
 
           <Text
             size="lg"
             muted
-            className="max-w-2xl"
+            className="max-w-2xl text-foreground/70"
           >
-            A curated selection of product,
-            fintech, enterprise, and
-            interaction-driven UX projects.
+            A curated selection of product
+            systems, UX strategy, cinematic
+            interfaces, and future-facing
+            interaction design.
           </Text>
         </motion.div>
 
-        {/* Projects */}
+        {/* Project Grid */}
         <motion.div
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 relative z-10"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
         >
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <motion.div
               key={project.title}
               variants={fadeUp}
-              transition={{
-                ...smoothTransition,
-                delay: index * 0.08,
-              }}
+              transition={smoothTransition}
             >
               <MagneticCard>
                 <button
@@ -183,9 +188,14 @@ export function WorkSection() {
                   onMouseLeave={() =>
                     setActiveProject(null)
                   }
-                  className="group relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03] backdrop-blur-sm shadow-[0_10px_60px_rgba(0,0,0,0.45)] text-left w-full"
+                  className="group relative w-full overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.03] backdrop-blur-xl text-left"
                 >
-                  {/* Hero Image */}
+                  {/* Glow */}
+                  <div
+                    className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-br ${project.glow}`}
+                  />
+
+                  {/* Image */}
                   <div className="relative aspect-[1.25] overflow-hidden">
                     <Image
                       src={project.image}
@@ -195,42 +205,18 @@ export function WorkSection() {
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
 
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-
-                    {/* Glow */}
-                    <div
-                      className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-br ${project.glow}`}
-                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                   </div>
 
                   {/* Content */}
-                  <div className="relative p-6 md:p-8">
-                    <div className="flex items-center justify-between mb-5">
-                      <Label>
-                        {project.category}
-                      </Label>
-
-                      <motion.div
-                        animate={{
-                          x:
-                            activeProject ===
-                            project.title
-                              ? 4
-                              : 0,
-                        }}
-                        transition={{
-                          duration: 0.3,
-                        }}
-                        className="text-white/40"
-                      >
-                        ↗
-                      </motion.div>
-                    </div>
+                  <div className="relative z-10 p-7 md:p-8">
+                    <Label className="mb-4">
+                      {project.category}
+                    </Label>
 
                     <Heading
                       as="h3"
-                      size="card"
+                      size="md"
                       className="mb-4"
                     >
                       {project.title}
@@ -238,10 +224,26 @@ export function WorkSection() {
 
                     <Text
                       muted
-                      className="text-white/65"
+                      className="text-foreground/70 leading-relaxed"
                     >
                       {project.description}
                     </Text>
+
+                    <motion.div
+                      animate={{
+                        x:
+                          activeProject ===
+                          project.title
+                            ? 8
+                            : 0,
+                      }}
+                      transition={{
+                        duration: 0.3,
+                      }}
+                      className="mt-8 text-sm uppercase tracking-[0.2em] text-white/60"
+                    >
+                      View Project →
+                    </motion.div>
                   </div>
                 </button>
               </MagneticCard>
@@ -249,9 +251,6 @@ export function WorkSection() {
           ))}
         </motion.div>
       </Container>
-
-      {/* Bottom cinematic bridge */}
-      <div className="absolute bottom-[-200px] left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-violet-500/10 blur-[180px] rounded-full pointer-events-none" />
     </Section>
   )
 }

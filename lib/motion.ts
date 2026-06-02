@@ -19,6 +19,6 @@ export const staggerContainer = {
 }
 
 export const smoothTransition = {
-  duration: 0.9,
-  ease: [0.22, 1, 0.36, 1],
+  duration: 0.8,
+  ease: [0.22, 1, 0.36, 1] as const,
 }
