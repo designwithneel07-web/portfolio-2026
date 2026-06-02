@@ -1,57 +1,150 @@
+'use client'
+
+import { motion } from 'framer-motion'
+
 import { Section, Container } from '@/components/section'
 import { Heading, Text, Label } from '@/components/typography'
 
+import {
+  fadeUp,
+  staggerContainer,
+  smoothTransition,
+} from '@/lib/motion'
+
 export function AboutSection() {
   return (
-    <Section id="about" className="border-t border-border">
+    <Section
+      id="about"
+      className="relative overflow-hidden border-t border-border pt-10 md:pt-20"
+    >
+      {/* Atmosphere */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-cyan-500/6 blur-[140px] rounded-full" />
+
+        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-fuchsia-500/6 blur-[140px] rounded-full" />
+      </div>
+
+      {/* Grid texture */}
+      <div className="absolute inset-0 opacity-[0.025] bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:80px_80px] pointer-events-none" />
+
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Left column */}
-          <div className="lg:col-span-5">
-            <Label className="mb-4">About</Label>
-            <Heading as="h2" size="xl">
-              Background
+        <motion.div
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20"
+        >
+          {/* Left Editorial Heading */}
+          <motion.div
+            variants={fadeUp}
+            transition={smoothTransition}
+            className="lg:col-span-5"
+          >
+            <Label className="mb-4">
+              About
+            </Label>
+
+            <Heading
+              as="h2"
+              size="lg"
+              className="tracking-tight leading-[0.92]"
+            >
+              Designing thoughtful systems for
+              humans, products, and future-facing
+              digital experiences.
             </Heading>
-          </div>
+          </motion.div>
 
-          {/* Right column */}
-          <div className="lg:col-span-7 flex flex-col gap-8">
-            <Text size="lg" muted className="leading-relaxed">
-              I specialize in creating user-centered digital products that solve
-              real problems. With a focus on clarity, usability, and craft, I
-              help teams build experiences that users genuinely enjoy.
+          {/* Right Content */}
+          <motion.div
+            variants={fadeUp}
+            transition={smoothTransition}
+            className="lg:col-span-7 flex flex-col gap-12"
+          >
+            <Text
+              size="lg"
+              muted
+              className="leading-relaxed text-foreground/80 text-xl md:text-[1.7rem] max-w-3xl"
+            >
+              I design digital products that
+              balance systems thinking,
+              usability, and emotional clarity —
+              crafting experiences that feel
+              intuitive, scalable, and deeply
+              human.
             </Text>
 
-            <Text muted className="leading-relaxed">
-              My approach combines strategic thinking with meticulous attention
-              to detail. I believe great design emerges from understanding both
-              user needs and business goals, then finding elegant solutions that
-              serve both.
+            <Text
+              muted
+              className="leading-relaxed text-base md:text-lg text-foreground/60 max-w-2xl"
+            >
+              My work spans fintech systems,
+              enterprise SaaS, public platforms,
+              and AI-native experiences —
+              combining interaction design,
+              storytelling, and product strategy
+              to create interfaces that feel
+              seamless in motion and intentional
+              in structure.
             </Text>
 
-            {/* Skills/Capabilities */}
-            <div className="grid grid-cols-2 gap-8 pt-8 border-t border-border">
+            {/* Capabilities */}
+            <motion.div
+              variants={fadeUp}
+              transition={smoothTransition}
+              className="grid grid-cols-2 gap-12 pt-12 border-t border-white/10"
+            >
               <div>
-                <Label className="mb-4 block">Capabilities</Label>
-                <ul className="flex flex-col gap-2">
-                  <li className="text-foreground/80 text-sm">UX Strategy</li>
-                  <li className="text-foreground/80 text-sm">Interface Design</li>
-                  <li className="text-foreground/80 text-sm">Design Systems</li>
-                  <li className="text-foreground/80 text-sm">Prototyping</li>
+                <Label className="mb-5 block">
+                  Capabilities
+                </Label>
+
+                <ul className="flex flex-col gap-3">
+                  <li className="text-foreground/80 text-base">
+                    UX Strategy
+                  </li>
+
+                  <li className="text-foreground/80 text-base">
+                    Interface Design
+                  </li>
+
+                  <li className="text-foreground/80 text-base">
+                    Design Systems
+                  </li>
+
+                  <li className="text-foreground/80 text-base">
+                    Prototyping
+                  </li>
                 </ul>
               </div>
+
               <div>
-                <Label className="mb-4 block">Tools</Label>
-                <ul className="flex flex-col gap-2">
-                  <li className="text-foreground/80 text-sm">Figma</li>
-                  <li className="text-foreground/80 text-sm">Framer</li>
-                  <li className="text-foreground/80 text-sm">Webflow</li>
-                  <li className="text-foreground/80 text-sm">Principle</li>
+                <Label className="mb-5 block">
+                  Tools
+                </Label>
+
+                <ul className="flex flex-col gap-3">
+                  <li className="text-foreground/80 text-base">
+                    Figma
+                  </li>
+
+                  <li className="text-foreground/80 text-base">
+                    Framer
+                  </li>
+
+                  <li className="text-foreground/80 text-base">
+                    Webflow
+                  </li>
+
+                  <li className="text-foreground/80 text-base">
+                    Principle
+                  </li>
                 </ul>
               </div>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </Container>
     </Section>
   )
