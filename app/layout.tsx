@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   creator: 'Neel Shah',
 
   metadataBase: new URL(
-    'https://portfolioneelshah.vercel.app'
+    'https://neel-portfolio-site.vercel.app'
   ),
 
   openGraph: {
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
       'Designing thoughtful digital systems for products, people, and future-facing experiences.',
 
     url:
-      'https://portfolioneelshah.vercel.app/',
+      'https://neel-portfolio-site.vercel.app',
 
     siteName:
       'Neel Shah Portfolio',

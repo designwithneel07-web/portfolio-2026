@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
+
 const images = [
   '/about/about-1.jpeg',
   '/about/about-2.jpeg',
