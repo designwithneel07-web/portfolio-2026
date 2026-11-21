@@ -96,7 +96,7 @@ export function HeroSection() {
             transition={smoothTransition}
           >
             <Label className="mb-5 md:mb-8">
-              Systems • UX • Interaction Design
+              Figma • Systems • UX • Interaction Design
             </Label>
           </motion.div>
 
