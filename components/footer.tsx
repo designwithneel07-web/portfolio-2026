@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 const socialLinks = [
   {
     href: 'https://www.linkedin.com/in/neel-shah-7a23941b3',
@@ -13,25 +15,6 @@ const emailAddress = 'designwithneel07@gmail.com'
 const gmailComposeUrl =
   `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailAddress)}` +
   `&su=${encodeURIComponent('Portfolio inquiry - Neel Shah')}`
-
-const ctaClassName =
-  'group inline-flex min-h-[72px] items-center justify-between gap-5 rounded-full border border-foreground/80 py-2 pl-7 pr-2 text-lg font-medium text-foreground transition-[background-color,color,border-color,transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:border-foreground hover:bg-foreground hover:text-background hover:shadow-[0_8px_24px_rgba(255,255,255,0.12)] active:translate-y-0 active:scale-[0.98] active:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-4 focus-visible:ring-offset-background motion-reduce:transition-none'
-
-function CtaArrow({ external = false }: { external?: boolean }) {
-  return (
-    <span className="flex size-12 shrink-0 items-center justify-center rounded-full transition-colors duration-200 group-hover:bg-black group-hover:text-white">
-      {external ? (
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-6">
-          <path d="M7 17 17 7M8 7h9v9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      ) : (
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-6">
-          <path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      )}
-    </span>
-  )
-}
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -63,46 +46,49 @@ export function Footer() {
                 I design high-craft digital products that turn complexity into clarity. Available for full-time UX/UI roles and select collaborations with teams that value precision.
               </p>
 
-              <div className="mt-10">
-                <div className="flex flex-wrap items-center gap-4 md:gap-5">
+              <div className="mt-10 flex flex-wrap items-start gap-x-4 gap-y-3">
+                <div className="flex shrink-0 flex-col gap-3">
                   <a
                     href={gmailComposeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={ctaClassName}
+                    className="group inline-flex h-[44px] shrink-0 items-center gap-2 rounded-full border-[0.8px] border-[rgba(238,238,238,0.75)] py-px pl-4 pr-px text-sm font-medium leading-5 text-[#eee] transition-colors duration-200 hover:bg-[#eee] hover:text-black active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-4 focus-visible:ring-offset-background motion-reduce:transition-none"
                   >
                     <span>Email me via Gmail</span>
-                    <CtaArrow />
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full transition-colors duration-200 group-hover:bg-black" aria-hidden="true">
+                      <Image src="/icons/figma-arrow-right.svg" alt="" width={20} height={20} className="size-5" />
+                    </span>
                     <span className="sr-only"> (opens Gmail compose in a new tab)</span>
                   </a>
-                  <div className="flex flex-wrap items-center gap-4">
-                    {socialLinks.map((link) => (
-                      <a
-                        key={link.label}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={ctaClassName}
-                      >
-                        <span>{link.label}</span>
-                        <CtaArrow external />
-                        <span className="sr-only"> (opens in a new tab)</span>
-                      </a>
-                    ))}
-                  </div>
+
+                  <a
+                    href={`mailto:${emailAddress}`}
+                    className="group inline-flex h-[42px] shrink-0 items-center gap-2 pl-4 pr-px py-px text-xs font-medium leading-4 text-foreground/60 transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-[0.98] motion-reduce:transition-none"
+                  >
+                    <span>Use another email app</span>
+                    <span className="flex size-10 shrink-0 items-center justify-center" aria-hidden="true">
+                      <Image src="/icons/figma-arrow-right.svg" alt="" width={20} height={20} className="size-5 opacity-60 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none" />
+                    </span>
+                  </a>
                 </div>
 
-                <a
-                  href={`mailto:${emailAddress}`}
-                  className="group mt-6 inline-flex min-h-11 items-center gap-5 rounded-full py-2 pr-2 text-base font-medium text-foreground transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-4 focus-visible:ring-offset-background active:scale-[0.98]"
-                >
-                  <span>Use another email app</span>
-                  <span className="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" className="size-6">
-                      <path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                </a>
+                <div className="flex items-center gap-4">
+                  {socialLinks.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex min-h-12 shrink-0 items-center gap-2 rounded-full border-[0.8px] border-[rgba(238,238,238,0.75)] py-[2px] pl-6 pr-[2px] text-sm font-medium leading-5 text-[#eee] transition-colors duration-200 hover:bg-[#eee] hover:text-black active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-4 focus-visible:ring-offset-background motion-reduce:transition-none"
+                    >
+                      <span>{link.label}</span>
+                      <span className="flex size-10 shrink-0 items-center justify-center rounded-full transition-colors duration-200 group-hover:bg-black" aria-hidden="true">
+                        <Image src="/icons/figma-arrow-up-right.svg" alt="" width={20} height={20} className="size-5 transition-[filter] duration-200 group-hover:brightness-0 group-hover:invert motion-reduce:transition-none" />
+                      </span>
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
