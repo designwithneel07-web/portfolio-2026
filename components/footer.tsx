@@ -12,7 +12,10 @@ const socialLinks = [
 const emailAddress = 'designwithneel07@gmail.com'
 const gmailComposeUrl =
   `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailAddress)}` +
-  `&su=${encodeURIComponent('Portfolio inquiry — Neel Shah')}`
+  `&su=${encodeURIComponent('Portfolio inquiry - Neel Shah')}`
+
+const ctaClassName =
+  'inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-foreground/75 px-6 py-3 text-sm font-medium text-foreground transition-[background-color,color,border-color,transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:border-foreground hover:bg-foreground hover:text-background hover:shadow-[0_8px_24px_rgba(255,255,255,0.12)] active:translate-y-0 active:scale-[0.98] active:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-4 focus-visible:ring-offset-background'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -32,48 +35,49 @@ export function Footer() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="py-24 md:py-32 lg:py-36">
           <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-7">
-            Contact
+            CONTACT
           </p>
 
           <div>
             <div>
               <h2 className="text-4xl md:text-6xl tracking-tight leading-[0.98] text-foreground max-w-3xl">
-                Designing systems that feel calm, clear, and deeply human.
+                Complex problems. Clean systems. Built to scale.
               </h2>
               <p className="mt-7 text-base md:text-lg leading-relaxed text-foreground/60 max-w-xl">
-                I’m interested in thoughtful product systems, future-facing digital experiences, and teams building meaningful interaction design.
+                I design high-craft digital products that turn complexity into clarity. Available for full-time UX/UI roles and select collaborations with teams that value precision.
               </p>
 
-              <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
-                <a
-                  href={gmailComposeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 text-base md:text-lg text-foreground hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-4 focus-visible:ring-offset-background rounded-sm"
-                >
-                  Email me via Gmail
-                  <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                  <span className="sr-only"> (opens Gmail compose in a new tab)</span>
-                </a>
-                <a
-                  href={`mailto:${emailAddress}`}
-                  className="text-sm text-foreground/55 hover:text-foreground transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-4 focus-visible:ring-offset-background rounded-sm"
-                >
-                  Use another email app
-                </a>
-
-                {socialLinks.map((link) => (
+              <div className="mt-10 flex flex-col items-start gap-4">
+                <div className="flex flex-col items-start gap-3">
                   <a
-                    key={link.label}
-                    href={link.href}
+                    href={gmailComposeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-foreground/55 hover:text-foreground transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-4 focus-visible:ring-offset-background rounded-sm"
+                    className={ctaClassName}
                   >
-                    {link.label}
-                    <span className="sr-only"> (opens in a new tab)</span>
+                    Email me via Gmail →
                   </a>
-                ))}
+                  <a
+                    href={`mailto:${emailAddress}`}
+                    className={ctaClassName + ' min-h-10 px-4 py-2 text-xs'}
+                  >
+                    Use another email app
+                  </a>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-4">
+                  {socialLinks.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={ctaClassName}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
