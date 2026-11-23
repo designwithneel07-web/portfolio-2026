@@ -15,7 +15,23 @@ const gmailComposeUrl =
   `&su=${encodeURIComponent('Portfolio inquiry - Neel Shah')}`
 
 const ctaClassName =
-  'inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-foreground/75 px-6 py-3 text-sm font-medium text-foreground transition-[background-color,color,border-color,transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:border-foreground hover:bg-foreground hover:text-background hover:shadow-[0_8px_24px_rgba(255,255,255,0.12)] active:translate-y-0 active:scale-[0.98] active:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-4 focus-visible:ring-offset-background'
+  'group inline-flex min-h-[72px] items-center justify-between gap-5 rounded-full border border-foreground/80 py-2 pl-7 pr-2 text-lg font-medium text-foreground transition-[background-color,color,border-color,transform,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:border-foreground hover:bg-foreground hover:text-background hover:shadow-[0_8px_24px_rgba(255,255,255,0.12)] active:translate-y-0 active:scale-[0.98] active:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-4 focus-visible:ring-offset-background motion-reduce:transition-none'
+
+function CtaArrow({ external = false }: { external?: boolean }) {
+  return (
+    <span className="flex size-12 shrink-0 items-center justify-center rounded-full transition-colors duration-200 group-hover:bg-black group-hover:text-white">
+      {external ? (
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-6">
+          <path d="M7 17 17 7M8 7h9v9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      ) : (
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-6">
+          <path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      )}
+    </span>
+  )
+}
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -47,37 +63,46 @@ export function Footer() {
                 I design high-craft digital products that turn complexity into clarity. Available for full-time UX/UI roles and select collaborations with teams that value precision.
               </p>
 
-              <div className="mt-10 flex flex-col items-start gap-4">
-                <div className="flex flex-col items-start gap-3">
+              <div className="mt-10">
+                <div className="flex flex-wrap items-center gap-4 md:gap-5">
                   <a
                     href={gmailComposeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={ctaClassName}
                   >
-                    Email me via Gmail →
+                    <span>Email me via Gmail</span>
+                    <CtaArrow />
+                    <span className="sr-only"> (opens Gmail compose in a new tab)</span>
                   </a>
-                  <a
-                    href={`mailto:${emailAddress}`}
-                    className={ctaClassName + ' min-h-10 px-4 py-2 text-xs'}
-                  >
-                    Use another email app
-                  </a>
+                  <div className="flex flex-wrap items-center gap-4">
+                    {socialLinks.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={ctaClassName}
+                      >
+                        <span>{link.label}</span>
+                        <CtaArrow external />
+                        <span className="sr-only"> (opens in a new tab)</span>
+                      </a>
+                    ))}
+                  </div>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-4">
-                  {socialLinks.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={ctaClassName}
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
+                <a
+                  href={`mailto:${emailAddress}`}
+                  className="group mt-6 inline-flex min-h-11 items-center gap-5 rounded-full py-2 pr-2 text-base font-medium text-foreground transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-4 focus-visible:ring-offset-background active:scale-[0.98]"
+                >
+                  <span>Use another email app</span>
+                  <span className="transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" className="size-6">
+                      <path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </a>
               </div>
             </div>
           </div>
