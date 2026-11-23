@@ -117,12 +117,17 @@ export function Navigation() {
 
             {/* Desktop CTA */}
             <div className="hidden md:block">
-              <Link
-                href="#contact"
-                className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-medium text-white backdrop-blur-sm md:backdrop-blur-md transition-all duration-300 hover:bg-white/[0.08]"
+              <a
+                href="/resume/Neel_Shah_Resume.pdf"
+                download="Neel_Shah_Resume.pdf"
+                aria-label="Download resume PDF"
+                className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-white/35 hover:bg-white/[0.1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-4 focus-visible:ring-offset-black active:scale-[0.98]"
               >
-                Let’s Talk
-              </Link>
+                Resume
+                <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" className="size-4 transition-transform duration-200 group-hover:translate-y-0.5">
+                  <path d="M10 3.5v9m0 0 3.5-3.5M10 12.5 6.5 9M4 15.5v1h12v-1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
             </div>
 
             {/* Mobile Menu Button */}
@@ -256,6 +261,20 @@ export function Navigation() {
                     </motion.li>
                   )
                 )}
+                <li>
+                  <a
+                    href="/resume/Neel_Shah_Resume.pdf"
+                    download="Neel_Shah_Resume.pdf"
+                    aria-label="Download resume PDF"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="inline-flex items-center gap-3 text-4xl tracking-tight leading-none text-white/90 transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+                  >
+                    Resume
+                    <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" className="size-6">
+                      <path d="M10 3.5v9m0 0 3.5-3.5M10 12.5 6.5 9M4 15.5v1h12v-1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
+                </li>
               </ul>
 
               {/* Footer note */}
