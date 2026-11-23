@@ -9,6 +9,11 @@ const socialLinks = [
   },
 ]
 
+const emailAddress = 'designwithneel07@gmail.com'
+const gmailComposeUrl =
+  `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailAddress)}` +
+  `&su=${encodeURIComponent('Portfolio inquiry — Neel Shah')}`
+
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
@@ -41,11 +46,20 @@ export function Footer() {
 
               <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
                 <a
-                  href="mailto:designwithneel07@gmail.com"
+                  href={gmailComposeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 text-base md:text-lg text-foreground hover:text-white transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-4 focus-visible:ring-offset-background rounded-sm"
                 >
-                  Email Neel directly
+                  Email me via Gmail
                   <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  <span className="sr-only"> (opens Gmail compose in a new tab)</span>
+                </a>
+                <a
+                  href={`mailto:${emailAddress}`}
+                  className="text-sm text-foreground/55 hover:text-foreground transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 focus-visible:ring-offset-4 focus-visible:ring-offset-background rounded-sm"
+                >
+                  Use another email app
                 </a>
 
                 {socialLinks.map((link) => (
