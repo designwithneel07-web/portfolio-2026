@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import {
@@ -17,6 +18,7 @@ const navLinks = [
 ]
 
 export function Navigation() {
+  const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] =
     useState(false)
 
@@ -33,6 +35,8 @@ export function Navigation() {
       handleScroll,
       { passive: true }
     )
+
+    handleScroll()
 
     return () => {
       window.removeEventListener(
@@ -80,9 +84,9 @@ export function Navigation() {
           }}
           className={cn(
             'mx-auto transition-all duration-500',
-            scrolled
-              ? 'rounded-[26px] border border-white/[0.08] bg-black/35 backdrop-blur-md md:backdrop-blur-2xl shadow-[0_6px_30px_rgba(0,0,0,0.28)] md:shadow-[0_12px_80px_rgba(0,0,0,0.42)]'
-              : 'bg-transparent'
+            scrolled && 'rounded-[26px] border border-white/[0.08] backdrop-blur-md md:backdrop-blur-2xl shadow-[0_6px_30px_rgba(0,0,0,0.28)] md:shadow-[0_12px_80px_rgba(0,0,0,0.42)]',
+            scrolled && (pathname.startsWith('/work/') ? 'bg-black/85' : 'bg-black/35'),
+            !scrolled && 'bg-transparent'
           )}
         >
           <nav
@@ -106,7 +110,7 @@ export function Navigation() {
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    href={pathname === '/' || link.href === '#contact' ? link.href : `/${link.href}`}
                     className="text-white/60 text-sm font-medium tracking-wide hover:text-white transition-all duration-300"
                   >
                     {link.label}
@@ -248,7 +252,7 @@ export function Navigation() {
                       }}
                     >
                       <Link
-                        href={link.href}
+                        href={pathname === '/' || link.href === '#contact' ? link.href : `/${link.href}`}
                         onClick={() =>
                           setMobileMenuOpen(
                             false

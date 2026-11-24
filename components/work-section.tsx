@@ -43,7 +43,7 @@ const projects = [
     glow:
       'from-emerald-500/20 via-teal-500/20 to-cyan-500/20',
     url:
-      'https://www.behance.net/gallery/249113145/Lumen-AI-SaaS-Admin-Permissions-Experience',
+      '/work/lumen',
     description:
       'Permissions, user-management, and enterprise-scale workflows for AI-powered global insights teams.',
   },
@@ -88,14 +88,6 @@ const projects = [
 export function WorkSection() {
   const [activeProject, setActiveProject] =
     useState<string | null>(null)
-
-  const handleProjectClick = (
-    url: string
-  ) => {
-    if (!url) return
-
-    window.open(url, '_blank')
-  }
 
   return (
     <Section
@@ -174,21 +166,16 @@ export function WorkSection() {
               transition={smoothTransition}
             >
               <MagneticCard>
-                <button
-                  onClick={() =>
-                    handleProjectClick(
-                      project.url
-                    )
-                  }
-                  onMouseEnter={() =>
-                    setActiveProject(
-                      project.title
-                    )
-                  }
-                  onMouseLeave={() =>
-                    setActiveProject(null)
-                  }
-                  className="group relative w-full overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.03] backdrop-blur-xl text-left"
+                <a
+                  href={project.url}
+                  target={project.url.startsWith('/') ? undefined : '_blank'}
+                  rel={project.url.startsWith('/') ? undefined : 'noopener noreferrer'}
+                  aria-label={project.url.startsWith('/') ? 'Read the Lumen case study' : `Open ${project.title} project in a new tab`}
+                  onMouseEnter={() => setActiveProject(project.title)}
+                  onMouseLeave={() => setActiveProject(null)}
+                  onFocus={() => setActiveProject(project.title)}
+                  onBlur={() => setActiveProject(null)}
+                  className="group relative block w-full overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.03] text-left backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-4 focus-visible:ring-offset-black"
                 >
                   {/* Glow */}
                   <div
@@ -242,10 +229,10 @@ export function WorkSection() {
                       }}
                       className="mt-8 text-sm uppercase tracking-[0.2em] text-white/60"
                     >
-                      View Project →
+                      {project.url.startsWith('/') ? 'Read case study →' : 'View project ↗'}
                     </motion.div>
                   </div>
-                </button>
+                </a>
               </MagneticCard>
             </motion.div>
           ))}
